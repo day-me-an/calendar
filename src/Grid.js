@@ -18,3 +18,21 @@ export function preOverflow(year, month) {
 
   return overflowDates
 }
+
+/**
+ * Returns the overflowing days in the next month.
+ * @returns {Array} An array of days.
+ * @param {number} year
+ * @param {number} month A zero-indexed month.
+ */
+export function nextOverflow(year, month) {
+  const lastDay = moment({month, year}).endOf('month')
+  const overflowCount = 7/*Sunday*/ - lastDay.isoWeekday()
+
+  const overflowDates = []
+  for (let day = 1; day <= overflowCount; day++) {
+    overflowDates.push(lastDay.clone().add(day, 'day').date())
+  }
+
+  return overflowDates
+}
