@@ -1,6 +1,6 @@
 import React from 'react'
 import {storiesOf, action, linkTo} from '@kadira/storybook'
-import {YearPicker} from './Calendar'
+import {YearPicker, MonthPicker} from './Calendar'
 
 storiesOf('YearPicker', module)
   .add('without initial value', () => (
@@ -8,4 +8,12 @@ storiesOf('YearPicker', module)
   ))
   .add('with initial value', () => (
     <YearPicker current={2000} onChange={action('set year')} />
+  ))
+
+storiesOf('MonthPicker', module)
+  .add('without initial value', () => (
+    <MonthPicker onChange={action('set month')} />
+  ))
+  .add('with initial value', () => (
+    <MonthPicker current={2/*March*/} onChange={action('set month')} />
   ))
