@@ -47,10 +47,15 @@ const styles = {
 }
 
 export const Grid = (props) => {
+  const {year, month} = props
+  const overflowStart = preOverflow(year, month)
+  const overflowEnd = nextOverflow(year, month)
+  const monthLength = moment({year, month}).daysInMonth()
+
   const days = [].concat(
-    props.overflowStart.map(day => <OverflowDay day={day} key={day} />),
-    _range(1, props.days + 1).map(day => <NormalDay day={day} key={day} />),
-    props.overflowEnd.map(day => <OverflowDay day={day} key={day} />)
+    overflowStart.map(day => <OverflowDay day={day} key={day} />),
+    _range(1, monthLength + 1).map(day => <NormalDay day={day} key={day} />),
+    overflowEnd.map(day => <OverflowDay day={day} key={day} />)
   )
   if (days.length % 7 != 0) {
     throw new Error(`Total number of days ${days.length} can't be rendered as weeks because it's not divisible by 7`)
@@ -78,9 +83,8 @@ export const Grid = (props) => {
 }
 
 Grid.propTypes = {
-  days: React.PropTypes.number.isRequired,
-  overflowStart: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
-  overflowEnd: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
+  year: React.PropTypes.number.isRequired,
+  month: React.PropTypes.number.isRequired,
 }
 
 const Week = (props) => (
