@@ -1,0 +1,16 @@
+.sp-calendar {
+  display: inline-block;
+  margin: 1em;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #888888;
+  background: linear-gradient(135deg, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%);
+  border-left: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+}
+
+.sp-calendar__controls {
+  padding: 0.75em 0;
+  padding-bottom: 0.25em;
+  display: flex;
+  justify-content: space-around;
+}

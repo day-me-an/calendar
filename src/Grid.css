@@ -1,0 +1,24 @@
+.sp-calendar-grid {
+  position: relative;
+  margin: 0.5em;
+}
+
+.sp-calendar-grid thead:after {
+  display: block;
+  content: '';
+  background: lightgray;
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  margin-top: 3px;
+}
+
+.sp-calendar-grid td {
+  padding: 1em;
+  text-align: center;
+}
+
+.sp-calendar-grid tbody td:hover {
+  background: #eee;
+  cursor: pointer;
+}

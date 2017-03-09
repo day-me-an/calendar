@@ -3,6 +3,8 @@ import moment from 'moment'
 import _range from 'lodash.range'
 import _chunk from 'lodash.chunk'
 
+import './Grid.css'
+
 /**
  * Returns the overflowing days from the preceding month.
  * @returns {Array} An array of days.
@@ -42,7 +44,8 @@ export function nextOverflow(year, month) {
 
 const styles = {
   overflowDay: {
-    color: 'gray'
+    color: 'gray',
+    fontWeight: 'lighter',
   }
 }
 
@@ -63,7 +66,7 @@ export const Grid = (props) => {
   const weeks = _chunk(days, 7)
 
   return (
-    <table>
+    <table className="sp-calendar-grid">
       <thead>
         <tr>
           <th>Mo</th>

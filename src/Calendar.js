@@ -3,13 +3,14 @@ import moment from 'moment'
 import _range from 'lodash.range'
 
 import {Grid} from './Grid'
+import './Calendar.css'
 
 export const Calendar = (props) => {
   const year = props.year !== undefined ? props.year : moment().year()
   const month = props.month !== undefined ? props.month : moment().month()
   return (
-    <div>
-      <div>
+    <div className="sp-calendar">
+      <div className="sp-calendar__controls">
         <PrevArrow year={year} month={month} onChange={props.onChange} />
         <YearPicker current={year} onChange={nextYear => props.onChange(nextYear, month)} />
         <MonthPicker current={month} onChange={nextMonth => props.onChange(year, nextMonth)} />
