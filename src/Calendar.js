@@ -29,10 +29,8 @@ Calendar.propTypes = {
 export const NextArrow = (props) => {
   const change = () => {
     const {year, month} = props
-    const date = moment({year, month})
-    date.add(1, 'month')
-
-    props.onChange(date.year(), date.month())
+    // Cycles back to 0 if they next past December.
+    props.onChange(year, (month + 1) % 12)
   }
   return (
     <button onClick={change}>Next</button>
@@ -42,10 +40,7 @@ export const NextArrow = (props) => {
 export const PrevArrow = (props) => {
   const change = () => {
     const {year, month} = props
-    const date = moment({year, month})
-    date.subtract(1, 'month')
-
-    props.onChange(date.year(), date.month())
+    props.onChange(year, (month + (12 - 1)) % 12)
   }
   return (
     <button onClick={change}>Prev</button>
