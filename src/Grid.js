@@ -57,7 +57,7 @@ export const Grid = (props) => {
     _range(1, monthLength + 1).map(day => <NormalDay day={day} key={day} />),
     overflowEnd.map(day => <OverflowDay day={day} key={day} />)
   )
-  if (days.length % 7 != 0) {
+  if (days.length % 7 > 0) {
     throw new Error(`Total number of days ${days.length} can't be rendered as weeks because it's not divisible by 7`)
   }
   const weeks = _chunk(days, 7)

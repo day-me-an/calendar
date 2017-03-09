@@ -62,7 +62,7 @@ export const YearPicker = (props) => {
   const currentYear = moment().year()
   const years = _range(currentYear, 1900 - 1)
   return (
-    <select value={props.current} onChange={event => {props.onChange(parseInt(event.target.value))}}>
+    <select value={props.current} onChange={event => {props.onChange(parseInt(event.target.value, 10))}}>
       {years.map(year => <option key={year} value={year}>{year}</option>)}
     </select>
   )
@@ -76,7 +76,7 @@ YearPicker.propTypes = {
 export const MonthPicker = (props) => {
   const months = moment.months()
   return (
-    <select value={props.current} onChange={event => {props.onChange(parseInt(event.target.value))}}>
+    <select value={props.current} onChange={event => {props.onChange(parseInt(event.target.value, 10))}}>
       {months.map((month, monthNumber) => <option key={month} value={monthNumber}>{month}</option>)}
     </select>
   )
