@@ -1,6 +1,6 @@
 import React from 'react'
 import {storiesOf, action, linkTo} from '@kadira/storybook'
-import {YearPicker, MonthPicker, Calendar} from './Calendar'
+import {YearPicker, MonthPicker, Calendar, NextArrow, PrevArrow} from './Calendar'
 
 /**
  * A stateful component to wrap the stateless Calendar for displaying in Storybook.
@@ -42,4 +42,14 @@ storiesOf('MonthPicker', module)
   ))
   .add('with initial value', () => (
     <MonthPicker current={2/*March*/} onChange={action('set month')} />
+  ))
+
+storiesOf('NextArrow', module)
+  .add('main', () => (
+    <NextArrow year={2000} month={0/*January*/} onChange={action('set year/month')} />
+  ))
+
+storiesOf('PrevArrow', module)
+  .add('main', () => (
+    <PrevArrow year={2000} month={0/*January*/} onChange={action('set year/month')} />
   ))
