@@ -30,8 +30,9 @@ Calendar.propTypes = {
 export const NextArrow = (props) => {
   const change = () => {
     const {year, month} = props
-    // Cycles back to 0 if they next past December.
-    props.onChange(year, (month + 1) % 12)
+    const date = moment({year, month})
+    date.add(1, 'month')
+    props.onChange(date.year(), date.month())
   }
   return (
     <button onClick={change}>Next</button>
@@ -41,7 +42,9 @@ export const NextArrow = (props) => {
 export const PrevArrow = (props) => {
   const change = () => {
     const {year, month} = props
-    props.onChange(year, (month + (12 - 1)) % 12)
+    const date = moment({year, month})
+    date.subtract(1, 'month')
+    props.onChange(date.year(), date.month())
   }
   return (
     <button onClick={change}>Prev</button>
@@ -54,9 +57,12 @@ NextArrow.propTypes = PrevArrow.propTypes = {
   onChange: React.PropTypes.func.isRequired,
 }
 
+export const MINIMUM_YEAR = 1900
+
 export const YearPicker = (props) => {
-  const currentYear = moment().year()
-  const years = _range(currentYear, 1900 - 1)
+  const thisYear = moment().year()
+  // The current year may be in the future or past if they navigated to it via the arrows.
+  const years = _range(Math.max(thisYear, props.current), Math.min(MINIMUM_YEAR, props.current) - 1)
   return (
     <select value={props.current} onChange={event => {props.onChange(parseInt(event.target.value, 10))}}>
       {years.map(year => <option key={year} value={year}>{year}</option>)}
@@ -65,7 +71,7 @@ export const YearPicker = (props) => {
 }
 
 YearPicker.propTypes = {
-  current: React.PropTypes.number,
+  current: React.PropTypes.number.isRequired,
   onChange: React.PropTypes.func.isRequired,
 }
 
@@ -79,6 +85,6 @@ export const MonthPicker = (props) => {
 }
 
 MonthPicker.propTypes = {
-  current: React.PropTypes.number,
+  current: React.PropTypes.number.isRequired,
   onChange: React.PropTypes.func.isRequired,
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import {storiesOf, action, linkTo} from '@kadira/storybook'
-import {YearPicker, MonthPicker, Calendar, NextArrow, PrevArrow} from './Calendar'
+import {YearPicker, MonthPicker, Calendar, NextArrow, PrevArrow, MINIMUM_YEAR} from './Calendar'
 
 /**
  * A stateful component to wrap the stateless Calendar for displaying in Storybook.
@@ -29,17 +29,17 @@ storiesOf('Calendar', module)
   ))
 
 storiesOf('YearPicker', module)
-  .add('without initial value', () => (
-    <YearPicker onChange={action('set year')} />
-  ))
-  .add('with initial value', () => (
+  .add('with year within range', () => (
     <YearPicker current={2000} onChange={action('set year')} />
+  ))
+  .add('with future year', () => (
+    <YearPicker current={(new Date()).getFullYear() + 10} onChange={action('set year')} />
+  ))
+  .add(`with year before minimum of ${MINIMUM_YEAR}`, () => (
+    <YearPicker current={MINIMUM_YEAR - 10} onChange={action('set year')} />
   ))
 
 storiesOf('MonthPicker', module)
-  .add('without initial value', () => (
-    <MonthPicker onChange={action('set month')} />
-  ))
   .add('with initial value', () => (
     <MonthPicker current={2/*March*/} onChange={action('set month')} />
   ))
